@@ -281,22 +281,21 @@ router.delete('/', auth, async (req, res) => {
 router.delete('/experience/:experience_id', auth, async (req, res) => {
   try {
     // get profile
-    const profile = await Profile.findOne({user: req.user.id,});
-    // find index of want to remove profile 
-    const removeIndex = profile.experience.map(item =>item.id).indexOf(req.params.experience_id);
+    const profile = await Profile.findOne({ user: req.user.id });
+    // find index of want to remove profile
+    const removeIndex = profile.experience
+      .map((item) => item.id)
+      .indexOf(req.params.experience_id);
     // remove
-    profile.experience.splice(removeIndex ,1);
+    profile.experience.splice(removeIndex, 1);
 
     await profile.save();
     res.json(profile);
-
-
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
 });
-
 
 //-------------------------------------------------------------------------
 // @route   DELETE api/profile/education/:education_id
@@ -306,15 +305,16 @@ router.delete('/experience/:experience_id', auth, async (req, res) => {
 router.delete('/education/:education_id', auth, async (req, res) => {
   try {
     // get profile
-    const profile = await Profile.findOne({user: req.user.id,});
-    // find index of want to remove profile 
-    const removeIndex = profile.education.map(item =>item.id).indexOf(req.params.education_id);
+    const profile = await Profile.findOne({ user: req.user.id });
+    // find index of want to remove profile
+    const removeIndex = profile.education
+      .map((item) => item.id)
+      .indexOf(req.params.education_id);
     // remove
-    profile.education.splice(removeIndex ,1);
+    profile.education.splice(removeIndex, 1);
 
     await profile.save();
     res.json(profile);
-
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
