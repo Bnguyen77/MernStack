@@ -55,7 +55,7 @@ async (req, res) => {
 
         if (!user){ // If no matched users in database/ return error
             return res.status(400).json ({
-                errors: [{msg: 'Invalid Credential (Email)'}]
+                errors: [{msg: 'Invalid Credential'}]
             });
         }
         // if there is user, check password
@@ -63,7 +63,7 @@ async (req, res) => {
 
         if (!isMatch){
             return res.status(400).json ({
-                errors: [{msg: 'Invalid Credential (Pass)'}]
+                errors: [{msg: 'Invalid Credential'}]
             });
         }
         //---------------------------------------
